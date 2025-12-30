@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-tables',
@@ -6,7 +6,18 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './tables.html'
 })
 export class Tables {
-  @Input() data: any[] = [];
-  @Output() edit = new EventEmitter<any>();
-  @Output() remove = new EventEmitter<any>();
+ data = input<any[]>([]); 
+
+  // Output Functions: No decorator needed
+  edit = output<any>();
+  remove = output<any>();
+
+  // Example helper methods to trigger the outputs
+  onEdit(item: any) {
+    this.edit.emit(item);
+  }
+
+  onRemove(item: any) {
+    this.remove.emit(item);
+  }
 }

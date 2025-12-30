@@ -15,6 +15,14 @@
       "email": "mahek@gmail.com",
       "address": "Valsad",
       "gender": "female"
+    },
+    {
+      "id": "103",
+      "name": "Harshil Sureja",
+      "phone": "07284050706",
+      "email": "harshil@gmail.com",
+      "address": "Valsad",
+      "gender": "male"
     }
   ],
   "students": [
