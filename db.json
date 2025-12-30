@@ -1,0 +1,38 @@
+{
+  "teachers": [
+    {
+      "id": "102",
+      "name": "Harshil Sureja",
+      "phone": "9875463210",
+      "email": "hemal932@gmail.com",
+      "address": "Sai Apt, Valsad - 396001Near Railway Colony , Station Road , Valsad - 396001",
+      "gender": "male"
+    },
+    {
+      "id": "103",
+      "name": "Mahek Sureja",
+      "phone": "9875463210",
+      "email": "mahek@gmail.com",
+      "address": "Valsad",
+      "gender": "female"
+    }
+  ],
+  "students": [
+    {
+      "id": "101",
+      "name": "hemal",
+      "phone": "9876500298",
+      "email": "hemal932@gmail.com",
+      "address": "Sai Apt, Valsad - 396001Near Railway Colony , Station Road , Valsad - 396001",
+      "gender": "male"
+    },
+    {
+      "id": "102",
+      "name": "Harshil Sureja",
+      "phone": "9875463210",
+      "email": "hemal932@gmail.com",
+      "address": "Sai Apt, Valsad - 396001Near Railway Colony , Station Road , Valsad - 396001",
+      "gender": "male"
+    }
+  ]
+}

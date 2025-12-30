@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Student } from '../student/student';
+import { StudentData } from '../interface';
+
+@Injectable({ providedIn: 'root' })
+export class StudentService {
+  getStudentCount(): number | undefined {
+    throw new Error('Method not implemented.');
+  }
+  students: StudentData[] = [];
+  private apiUrl = 'http://localhost:3000/students';
+
+  constructor(private http: HttpClient) {}
+
+  getAll(): Observable<StudentData[]> {
+    return this.http.get<StudentData[]>(this.apiUrl);
+  }
+
+  add(student: Student): Observable<StudentData> {
+    return this.http.post<StudentData>(this.apiUrl, student);
+  }
+
+  update(student: Student): Observable<StudentData> {
+    return this.http.put<StudentData>(`${this.apiUrl}/${student.id}`, student);
+  }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+}

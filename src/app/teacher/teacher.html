@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentModal" (click)="editTeacher = null">
+    ADD Teacher
+  </button>
+
+  <app-tables [data]="teachers" (edit)="edit($event)" (remove)="deleteTeacher($event)"></app-tables>
+
+  <div class="modal fade" id="studentModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editTeacher ? 'Edit' : 'Add' }} Teacher</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <app-forms [editData]="editTeacher" (added)="addTeacher($event)" (updated)="updateTeacher($event)"></app-forms>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

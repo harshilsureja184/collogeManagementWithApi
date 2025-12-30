@@ -1,0 +1,133 @@
+<div class="container-fluid min-vh-100 p-0 d-flex" style="background-color: #f8fafc; font-family: 'Inter', sans-serif;">
+  
+  <nav class="bg-white border-end d-none d-md-flex flex-column p-4" style="width: 290px; border-color: #e2e8f0 !important;">
+    <div class="d-flex align-items-center mb-5 px-2">
+      <div class="rounded-3 d-flex align-items-center justify-content-center me-3 shadow-sm" 
+           style="width: 42px; height: 42px; background: linear-gradient(135deg, #4f46e5, #6366f1);">
+        <i class="bi bi-grid-1x2-fill text-white fs-5"></i>
+      </div>
+      <span class="fs-4 fw-bold text-dark tracking-tight">Edu<span style="color: #4f46e5;">Core</span></span>
+    </div>
+
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item mb-3">
+        <a href="#" class="nav-link active rounded-pill py-3 px-4 shadow-sm d-flex align-items-center" 
+           style="background: #1e293b; border: none;">
+          <i class="bi bi-house-door-fill me-3"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a [routerLink]="['/teacher']" class="nav-link text-secondary py-3 px-4 rounded-pill hover-effect">
+          <i class="bi bi-person-workspace me-3"></i> Faculty
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a [routerLink]="['/student']" class="nav-link text-secondary py-3 px-4 rounded-pill hover-effect">
+          <i class="bi bi-mortarboard me-3"></i> Students
+        </a>
+      </li>
+    </ul>
+
+    <div class="mt-auto pt-4 border-top">
+      <div class="p-3 bg-light rounded-4 d-flex align-items-center shadow-sm border">
+        <div class="bg-white rounded-circle shadow-sm p-1 me-3">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=4f46e5&color=fff" class="rounded-circle" width="35">
+        </div>
+        <div>
+          <p class="mb-0 fw-bold text-dark small">Admin User</p>
+          <small class="text-muted">Super Admin</small>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow-1 p-4 p-lg-5 overflow-auto">
+    
+    <header class="d-flex justify-content-between align-items-end mb-5">
+      <div>
+        <h1 class="fw-black text-dark tracking-tight mb-1" style="font-weight: 800; letter-spacing: -1px;">General Dashboard</h1>
+        <p class="text-muted fs-6">Monitor school performance and manage institutional data.</p>
+      </div>
+      <div class="d-none d-lg-block text-end">
+        <p class="small text-uppercase fw-bold text-muted mb-1 ls-wide">Current Session</p>
+        <span class="badge bg-white text-dark border shadow-sm py-2 px-3 rounded-pill">
+            <i class="bi bi-calendar-event me-2 text-primary"></i> Academic Year 2025/26
+        </span>
+      </div>
+    </header>
+
+    <div class="row g-4 mb-5">
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm p-4 h-100 position-relative overflow-hidden" style="border-radius: 1.5rem; background: #fff;">
+          <div class="position-absolute top-0 end-0 p-3 opacity-25">
+            <i class="bi bi-people fs-1 text-primary"></i>
+          </div>
+          <small class="text-secondary fw-bold text-uppercase mb-2 d-block">Teachers</small>
+          <h2 class="fw-bold mb-0 text-dark display-6">{{totalTeachers}}</h2>
+          <div class="mt-2 text-success small"><i class="bi bi-arrow-up"></i>100</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm p-4 h-100 position-relative overflow-hidden" style="border-radius: 1.5rem; background: #fff;">
+            <div class="position-absolute top-0 end-0 p-3 opacity-25">
+                <i class="bi bi-mortarboard fs-1 text-success"></i>
+            </div>
+          <small class="text-secondary fw-bold text-uppercase mb-2 d-block">Students</small>
+          <h2 class="fw-bold mb-0 text-dark display-6">{{totalStudents}}</h2>
+          <div class="mt-2 text-success small"><i class="bi bi-arrow-up"></i> 4000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-lg h-100" style="border-radius: 2rem; background: white;">
+          <div class="card-body p-5">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div class="rounded-4 d-flex align-items-center justify-content-center shadow-sm" 
+                   style="width: 70px; height: 70px; background: #f0f4ff; color: #4f46e5;">
+                <i class="bi bi-person-workspace fs-2"></i>
+              </div>
+              <span class="badge rounded-pill px-3 py-2" style="background: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe;">Active Management</span>
+            </div>
+            
+            <h2 class="fw-bold text-dark mb-3">Faculty Hub</h2>
+            <p class="text-muted mb-4 fs-6">Comprehensive system for teacher schedules, payroll, and performance evaluations.</p>
+            
+            <a [routerLink]="['/teacher']" 
+               class="btn btn-dark w-100 py-3 fw-bold d-flex align-items-center justify-content-center shadow" 
+               style="border-radius: 1.25rem; background: #1e293b; border: none; transition: 0.3s;">
+               Manage Teachers
+               <i class="bi bi-arrow-right-circle-fill ms-3"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-0 shadow-lg h-100" style="border-radius: 2rem; background: white;">
+          <div class="card-body p-5">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div class="rounded-4 d-flex align-items-center justify-content-center shadow-sm" 
+                   style="width: 70px; height: 70px; background: #ecfdf5; color: #10b981;">
+                <i class="bi bi-mortarboard fs-2"></i>
+              </div>
+              <span class="badge rounded-pill px-3 py-2" style="background: #f0fdf4; color: #10b981; border: 1px solid #d1fae5;">Registrar Portal</span>
+            </div>
+
+            <h2 class="fw-bold text-dark mb-3">Student Portal</h2>
+            <p class="text-muted mb-4 fs-6">Manage enrollment, track student grades, and generate academic reports instantly.</p>
+
+            <a [routerLink]="['/student']" 
+               class="btn py-3 fw-bold d-flex align-items-center justify-content-center shadow text-white" 
+               style="border-radius: 1.25rem; background: #10b981; border: none; transition: 0.3s;">
+               Manage Students
+               <i class="bi bi-arrow-right-circle-fill ms-3"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>

@@ -1,0 +1,76 @@
+<div class="card border-0 shadow-sm mt-4">
+  <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+    <h6 class="mb-0 fw-bold text-dark">Student Directory</h6>
+    <!-- <button class="btn btn-primary btn-sm rounded-pill px-3">+ Add New</button> -->
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
+        <tr class="text-secondary small text-uppercase">
+          <th class="ps-4 border-0">Student</th>
+          <th class="border-0">Contact</th>
+          <th class="border-0">Address</th>
+          <th class="border-0 text-center">Gender</th>
+          <th class="border-0 text-end pe-4">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (student of data; track student.id) {
+        <tr>
+          <td class="ps-4">
+            <div class="d-flex align-items-center">
+              <div class="avatar bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center me-3 fw-bold" style="width: 38px; height: 38px; font-size: 0.85rem;">
+                {{ student.name.charAt(0) }}
+              </div>
+              <div class="fw-bold text-dark">{{ student.name }}</div>
+            </div>
+          </td>
+
+          <td>
+            <div class="d-flex flex-column">
+              <span class="text-dark small">{{ student.email }}</span>
+              <small class="text-muted">{{ student.phone }}</small>
+            </div>
+          </td>
+
+          <td>
+            <span class="text-muted small">{{ student.address }}</span>
+          </td>
+
+          <td class="text-center">
+            <span class="badge rounded-pill bg-light text-dark border px-3 py-2 fw-normal">
+              {{ student.gender }}
+            </span>
+          </td>
+
+          <td class="text-end pe-4">
+            <div class="btn-group shadow-sm border rounded">
+              <button
+                class="btn btn-white btn-sm border-0 text-warning"
+                (click)="edit.emit(student)"
+                data-bs-toggle="modal"
+                data-bs-target="#studentModal">
+                <i class="bi bi-pencil-square"></i> Edit
+              </button>
+              <button
+                class="btn btn-white btn-sm border-0 text-danger border-start"
+                (click)="remove.emit(student.id)">
+                <i class="bi bi-trash"></i>Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="5" class="text-center py-5 text-muted">
+            <div class="mb-2"><i class="bi bi-folder2-open display-6"></i></div>
+            No student records found.
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
