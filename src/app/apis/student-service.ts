@@ -18,11 +18,11 @@ export class StudentService {
     return this.http.get<StudentData[]>(this.apiUrl);
   }
 
-  add(student: Student): Observable<StudentData> {
+  add(student: StudentData): Observable<StudentData> {
     return this.http.post<StudentData>(this.apiUrl, student);
   }
 
-  update(student: Student): Observable<StudentData> {
+  update(student: StudentData): Observable<StudentData> {
     return this.http.put<StudentData>(`${this.apiUrl}/${student.id}`, student);
   }
 

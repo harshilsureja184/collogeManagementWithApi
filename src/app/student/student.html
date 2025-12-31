@@ -1,42 +1,87 @@
-<div class="min-vh-100 bg-body-tertiary bg-gradient d-block py-5">
+<div class="min-vh-100 py-5"
+  style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%); font-family: 'Inter', sans-serif;">
+
   <div class="container">
-    
-    <div class="row mb-4 align-items-center">
-      <div class="col">
-        <h2 class="display-6 fw-bold text-dark-emphasis mb-1">Student Hub</h2>
-        <p class="text-secondary mb-0">Manage your academic database with ease</p>
-      </div>
-      <div class="col-auto">
-        <button class="btn btn-white shadow-sm border-light-subtle rounded-pill px-4 py-2 fw-semibold text-primary" 
-                data-bs-toggle="modal" 
-                data-bs-target="#studentModal" 
-                (click)="editStudent = null">
-          <span class="me-1">+</span> ADD STUDENT
-        </button>
-      </div>
-    </div>
-
-    <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-      <div class="card-body p-0">
-        <app-tables [data]="students" (edit)="edit($event)" (remove)="deleteStudent($event)"></app-tables>
-      </div>
-    </div>
-
-    <div class="modal fade" id="studentModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-5 overflow-hidden">
-          <div class="modal-header border-0 bg-primary bg-gradient p-4">
-            <h5 class="modal-title fw-bold text-white">
-              {{ editStudent ? 'Edit Profile' : 'New Student' }}
-            </h5>
-            <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal"></button>
+    <div class="card border-0 mb-4"
+      style="border-radius: 24px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid rgba(255,255,255,0.4);">
+      <div class="card-body p-4">
+        <div class="row align-items-center">
+          <div class="col-lg-8 d-flex align-items-center">
+            <div
+              class="bg-primary bg-gradient shadow-sm rounded-3 d-flex align-items-center justify-content-center me-4"
+              style="width: 60px; height: 60px;">
+              <i class="bi bi-mortarboard-fill text-white fs-3"></i>
+            </div>
+            <div>
+              <h2 class="fw-bold text-dark mb-0 tracking-tight" style="letter-spacing: -0.03em;">Student Management</h2>
+              <p class="text-muted mb-0 d-flex align-items-center">
+                <span class="badge rounded-pill bg-success-subtle text-success me-2" style="font-size: 0.7rem;">LIVE
+                  SYSTEM</span>
+                Manage your academic database with ease
+              </p>
+            </div>
           </div>
-          <div class="modal-body p-4 bg-white">
-            <app-forms [editData]="editStudent" (added)="addStudent($event)" (updated)="updateStudent($event)"></app-forms>
+          <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+            <button class="btn btn-primary rounded-pill px-4 py-3 fw-bold shadow d-inline-flex align-items-center"
+              style="transition: all 0.3s ease; border: none; background: linear-gradient(135deg, #0d6efd 0%, #0043a8 100%);"
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(13, 110, 253, 0.3)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+              data-bs-toggle="modal" data-bs-target="#studentModal" (click)="editStudent = null">
+              <i class="bi bi-plus-lg me-2"></i>
+              REGISTER STUDENT
+            </button>
           </div>
         </div>
       </div>
     </div>
-    
+
+    <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 24px; background: #ffffff;">
+      <div class="card-header bg-white border-0 pt-4 px-4 pb-0">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="fw-bold mb-0 text-secondary">Student Directory</h5>
+          <div class="input-group style='width: 250px;'">
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <app-table [data]="students$" (edit)="edit($event)" (remove)="deleteStudent($event)">
+        </app-table>
+      </div>
+    </div>
+
+    <div class="modal fade" id="studentModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 28px; overflow: hidden;">
+
+          <div class="modal-header border-0 pt-4 px-4 pb-2 d-flex align-items-start"
+            style="background: linear-gradient(to right, #ffffff, #f8f9fa);">
+            <div class="d-flex align-items-center">
+              <div [class]="editStudent ? 'bg-warning-subtle text-warning' : 'bg-primary-subtle text-primary'"
+                class="rounded-4 d-flex align-items-center justify-content-center me-3 shadow-sm"
+                style="width: 52px; height: 52px; border: 1px solid rgba(0,0,0,0.05);">
+                <i class="bi fs-3" [class]="editStudent ? 'bi-pencil-square' : 'bi-person-plus-fill'"></i>
+              </div>
+              <div>
+                <h4 class="modal-title fw-bold text-dark mb-0">
+                  {{ editStudent ? 'Update Profile' : 'New Enrollment' }}
+                </h4>
+                <p class="text-muted small mb-0">Please provide accurate information</p>
+              </div>
+            </div>
+            <button type="button" class="btn-close ms-auto shadow-none" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body p-4">
+            <div class="p-2 bg-light rounded-4 mb-3 border border-dashed border-secondary-subtle">
+              <app-forms [editData]="editStudent" (added)="addStudent($event)"
+                (updated)="updateStudent($event)"></app-forms>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

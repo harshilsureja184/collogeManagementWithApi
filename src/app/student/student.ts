@@ -3,81 +3,65 @@ import { StudentService } from '../apis/student-service';
 import { Forms } from '../shared/forms/forms';
 import { Tables } from '../shared/tables/tables';
 import { StudentData } from '../interface';
+import { Observable, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-student',
   standalone: true,
   imports: [Forms, Tables],
   templateUrl: './student.html',
+  styleUrls: ['./student.css']
 })
 export class Student implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private studentService = inject(StudentService);
 
-  students: StudentData[] = [];
-  editStudent: StudentData | null= null;
+  students$!: Observable<StudentData[]>; // Observable stream for async pipe
+  editStudent: StudentData | null = null;
   id: any;
-
 
   ngOnInit() {
     this.loadStudents();
   }
 
-  // 1. Load Data
   loadStudents() {
-    this.studentService.getAll().subscribe(res => {
-      this.students = res;
-      this.cdr.detectChanges(); // 🔥 Force UI refresh
-    });
+    this.students$ = this.studentService.getAll();
+    this.cdr.detectChanges();
   }
 
-  // 2. Add Student (Push directly to list)
-  addStudent(data: any) {
-    this.studentService.add(data).subscribe(res => {
+  // Use async/await for mutations
+  async addStudent(data: StudentData) {
+    try {
+      await firstValueFrom(this.studentService.add(data));
       alert('Student Added Successfully');
-      this.students.push(res); // 🔥 Add to array manually
-      this.cdr.detectChanges();
-    });
-  }
-
-  // 3. Update Student (Manual index update)
-  updateStudent(data: any) {
-    const id = data.id;
-    this.studentService.update(data).subscribe(() => {
-      alert('Student Updated Successfully');
-      
-      // 🔥 Find index and replace record manually
-      const index = this.students.findIndex(s => s.id === id);
-      if (index !== -1) {
-        this.students[index] = data; 
-      }
-      
-      this.editStudent = null;
-      this.cdr.detectChanges();
-    });
-  }
-
-  // 4. Delete Student (Traditional loop and splice)
-  deleteStudent(id: any) {
-    if (confirm('Are you sure you want to delete?')) {
-      this.studentService.delete(id).subscribe(() => {
-        alert('Student Deleted Successfully');
-
-        // 🔥 Traditional loop to remove item
-        for (let i = 0; i < this.students.length; i++) {
-          if (this.students[i].id === id) {
-            this.students.splice(i, 1); // 🔥 Splice from array
-            break;
-          }
-        }
-        
-        this.cdr.detectChanges();
-      });
+      this.loadStudents(); // refresh the Observable
+    } catch (error) {
+      console.error('Error adding student:', error);
     }
   }
 
-  // 5. Setup for Edit Mode
-  edit(data: any) {
+  async updateStudent(data: StudentData) {
+    try {
+      await firstValueFrom(this.studentService.update(data));
+      alert('Student Updated Successfully');
+      this.loadStudents();
+      this.editStudent = null;
+    } catch (error) {
+      console.error('Error updating student:', error);
+    }
+  }
+
+  async deleteStudent(id: string) {
+    try {
+      await firstValueFrom(this.studentService.delete(id));
+      alert('Student Deleted Successfully');
+      this.loadStudents();
+    } catch (error) {
+      console.error('Error deleting student:', error);
+    }
+  }
+
+  edit(data: StudentData) {
     this.editStudent = { ...data };
   }
 }

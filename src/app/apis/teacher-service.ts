@@ -24,11 +24,11 @@ export class TeacherService {
     return this.http.get<TeacherData[]>(this.apiUrl);
   }
 
-  add(teacher: Teacher): Observable<TeacherData> {
+  add(teacher: TeacherData): Observable<TeacherData> {
     return this.http.post<TeacherData>(this.apiUrl, teacher);
   }
 
-  update(teacher: Teacher): Observable<TeacherData> {
+  update(teacher: TeacherData): Observable<TeacherData> {
     return this.http.put<TeacherData>(`${this.apiUrl}/${teacher.id}`, teacher);
   }
 

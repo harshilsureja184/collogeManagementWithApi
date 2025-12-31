@@ -1,23 +1,19 @@
-import { Component, Input, Output, EventEmitter, input, output } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
+import { TeacherData } from '../../interface'; 
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-tables',
+  selector: 'app-table',
   standalone: true,
-  templateUrl: './tables.html'
+  imports: [CommonModule],
+  templateUrl: './tables.html',
+  styleUrls: ['./tables.css']
 })
 export class Tables {
- data = input<any[]>([]); 
-
-  // Output Functions: No decorator needed
-  edit = output<any>();
-  remove = output<any>();
-
-  // Example helper methods to trigger the outputs
-  onEdit(item: any) {
-    this.edit.emit(item);
-  }
-
-  onRemove(item: any) {
-    this.remove.emit(item);
-  }
+  // 1. Using Signal Inputs (Read-only)
+ @Input() data: Observable<any[]> | null = null; 
+  
+  @Output() edit = new EventEmitter<any>();
+  @Output() remove = new EventEmitter<string>();
 }
